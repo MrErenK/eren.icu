@@ -1,0 +1,144 @@
+{
+  "site": {
+    "name": "Eren",
+    "handle": "eren",
+    "tld": ".icu",
+    "easterEgg": "i see you",
+    "email": "hello@eren.icu",
+    "availabilityBadge": "Web, modding, and AOSP",
+    "headline": "Building web tools, Android ROM utilities, and small mods.",
+    "subheadline": "I am Eren, a student and developer exploring modern web applications, Python scripts, game mods, and AOSP development.",
+    "contactPrompt": "Open to interesting software projects, web tools, and collaborations.",
+    "socials": [
+      {
+        "label": "GitHub",
+        "handle": "MrErenK",
+        "href": "https://github.com/MrErenK",
+        "note": "Repositories, mods, and AOSP scripts."
+      },
+      {
+        "label": "Telegram",
+        "handle": "@Mr_ErenK",
+        "href": "https://t.me/Mr_ErenK",
+        "note": "Direct messages and quick conversations."
+      }
+    ]
+  },
+  "about": {
+    "lead": "I enjoy building practical web apps, Android build tools, and lightweight mods for games I play.",
+    "paragraphs": [
+      "I am a student learning web development, Python, and AOSP. Most of my projects start from something I want to use myself, whether that is managing S3-compatible object storage buckets, benchmarking Android ROM builds, or fixing small annoyances in games.",
+      "On the web side, I work mostly with Next.js, TypeScript, Tailwind CSS, and Prisma. Outside the browser, I experiment with Java mods for Minecraft, C# plugins for Spaceflight Simulator, and shell automation for AOSP and kernel builds."
+    ],
+    "stack": [
+      {
+        "group": "Web",
+        "items": ["TypeScript", "Next.js", "React", "Tailwind CSS", "Prisma"]
+      },
+      {
+        "group": "Systems and Mods",
+        "items": ["Java", "C#", "Python", "Shell", "AOSP"]
+      },
+      {
+        "group": "Infrastructure",
+        "items": ["PostgreSQL", "S3 Object Storage", "Fabric", "Forge", "NeoForge", "Linux"]
+      }
+    ]
+  },
+  "works": [
+    {
+      "slug": "gcp-bucket-nextjs",
+      "title": "gcp-bucket-nextjs",
+      "year": "2026",
+      "category": "Web",
+      "status": "Live",
+      "featured": true,
+      "url": "https://dl.mrerenk.tr",
+      "repo": "https://github.com/MrErenK/gcp-bucket-nextjs",
+      "summary": "Next.js application to upload, search, and download files directly through an S3-compatible object storage bucket.",
+      "description": "Powers a monospace-themed ROM-hosting site and file catalog backed by S3-compatible object storage, with variant filters, upload management, and direct file downloads.",
+      "tags": ["Next.js", "TypeScript", "S3 Object Storage"]
+    },
+    {
+      "slug": "aosp-build-times",
+      "title": "aosp-build-times",
+      "year": "2026",
+      "category": "Web",
+      "status": "Live",
+      "featured": true,
+      "url": "https://ab.mrerenk.tr",
+      "repo": "https://github.com/MrErenK/aosp-build-times",
+      "summary": "Web dashboard for recording, searching, and comparing Android ROM compilation times across server specs.",
+      "description": "Built with Next.js 16 and Prisma Postgres to track clean and dirty build durations, hosting specs, and searchable community submissions.",
+      "tags": ["Next.js", "Prisma", "PostgreSQL", "AOSP"]
+    },
+    {
+      "slug": "scrollfly",
+      "title": "ScrollFly",
+      "year": "2026",
+      "category": "Mods",
+      "status": "Published",
+      "featured": true,
+      "repo": "https://github.com/MrErenK/ScrollFly",
+      "links": [
+        { "label": "Modrinth", "href": "https://modrinth.com/mod/scrollfly" },
+        { "label": "CurseForge", "href": "https://www.curseforge.com/minecraft/mc-mods/scrollfly" }
+      ],
+      "summary": "Minecraft mod for Fabric and Forge that brings Spectator mode scroll wheel flight speed adjustment into Creative mode.",
+      "description": "Lets players speed up or slow down cleanly while flying in Creative mode using the mouse wheel, complete with a toggle keybind to switch back to hotbar scrolling.",
+      "tags": ["Java", "Fabric", "Forge", "Minecraft"]
+    },
+    {
+      "slug": "mapdistancefix",
+      "title": "MapDistanceFix",
+      "year": "2026",
+      "category": "Mods",
+      "status": "Published",
+      "featured": true,
+      "repo": "https://github.com/MrErenK/MapDistanceFix",
+      "links": [
+        { "label": "Modrinth", "href": "https://modrinth.com/mod/map-distance-fix" },
+        { "label": "CurseForge", "href": "https://www.curseforge.com/minecraft/mc-mods/map-distance-fix" }
+      ],
+      "summary": "Minecraft Fabric mod for 1.20.1 and newer that keeps player position and facing direction visible beyond map boundaries.",
+      "description": "Replaces generic boundary dot icons with directional player markers for Minecraft 1.20.1+ so navigating treasure maps and distant regions stays intuitive.",
+      "tags": ["Java", "Fabric", "NeoForge", "Forge", "1.20.1+", "Minecraft"]
+    },
+    {
+      "slug": "solarfuelmod",
+      "title": "SolarFuelMod",
+      "year": "2026",
+      "category": "Mods",
+      "status": "Open Source",
+      "repo": "https://github.com/MrErenK/SolarFuelMod",
+      "summary": "Lightweight Spaceflight Simulator mod that lets solar panels generate liquid fuel.",
+      "description": "Written in C# with Harmony patches to extend solar panel behavior in Spaceflight Simulator without modifying core game assemblies.",
+      "tags": ["C#", "Harmony", "Unity"]
+    },
+    {
+      "slug": "berrymuch",
+      "title": "BerryMuch",
+      "year": "2025",
+      "category": "Mods",
+      "status": "Published",
+      "repo": "https://github.com/MrErenK/BerryMuch",
+      "links": [
+        { "label": "Modrinth", "href": "https://modrinth.com/mod/berry-much" }
+      ],
+      "summary": "Minecraft Fabric mod that aligns berry and melon slice nutrition with their textures and includes a reloadable JSON config.",
+      "description": "Adjusts Sweet Berries, Glow Berries, and Melon Slices so hunger and saturation match visual portions, with customizable food values via config file and reload command.",
+      "tags": ["Java", "Fabric", "Modrinth"]
+    },
+    {
+      "slug": "scripts",
+      "title": "Scripts",
+      "year": "2025",
+      "category": "Tools",
+      "status": "Open Source",
+      "repo": "https://github.com/MrErenK/Scripts",
+      "summary": "Shell scripts to automate AOSP environment setup and Android kernel compilation workflows.",
+      "description": "Includes kranul-build.sh supporting multiple compilers, KernelSU, and Telegram announcements, alongside setup-aosp-environment.sh for installing packages and configuring ccache.",
+      "tags": ["Shell", "AOSP", "Kernel", "Linux"]
+    }
+  ]
+}
