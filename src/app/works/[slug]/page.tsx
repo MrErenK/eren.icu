@@ -47,7 +47,7 @@ export default async function WorkPage({
   return (
     <PageTransition>
       <div className="space-y-12">
-        <div className="flex items-center justify-between gap-4 border-b border-zinc-200/80 pb-3 font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500 dark:border-zinc-800/80 dark:text-zinc-400">
+        <div className="flex items-center justify-between gap-4 border-b border-zinc-200/80 pb-3 font-mono text-xs text-zinc-500 dark:border-zinc-800/80 dark:text-zinc-400">
           <Link
             href="/works"
             transitionTypes={["nav-back"]}
@@ -61,27 +61,23 @@ export default async function WorkPage({
             </span>
             <span className="link-underline">All works</span>
           </Link>
-          <span>
-            Case study / {String(index + 1).padStart(2, "0")} of{" "}
-            {String(WORKS.length).padStart(2, "0")}
-          </span>
         </div>
 
         <header className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-zinc-500 tabular-nums dark:text-zinc-400">
+            <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-zinc-500 tabular-nums dark:text-zinc-400">
               <span>{project.category}</span>
               <span aria-hidden="true">/</span>
               <ProjectStatus status={project.status} />
               <span aria-hidden="true">/</span>
               <span>{project.year}</span>
             </div>
-            <h1 className="mt-5 wrap-break-word font-serif text-5xl font-normal leading-[0.92] tracking-[-0.045em] text-zinc-950 dark:text-zinc-50 sm:text-6xl lg:text-7xl">
+            <h1 className="mt-4 wrap-break-word font-display text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-zinc-950 dark:text-zinc-50 sm:text-5xl lg:text-6xl">
               {project.title}
             </h1>
           </div>
 
-          <p className="max-w-xl text-[17px] leading-relaxed text-zinc-600 dark:text-zinc-400 lg:col-span-4">
+          <p className="max-w-xl text-[16px] leading-relaxed text-zinc-600 dark:text-zinc-400 lg:col-span-4">
             {project.summary}
           </p>
         </header>
@@ -102,42 +98,42 @@ export default async function WorkPage({
         >
           <div>
             <SectionLabel>Year</SectionLabel>
-            <p className="mt-2 font-serif text-3xl font-normal tracking-[-0.02em] text-zinc-950 dark:text-zinc-50">
+            <p className="mt-2 font-mono text-sm font-medium text-zinc-950 tabular-nums dark:text-zinc-50">
               {project.year}
             </p>
           </div>
 
           <div>
             <SectionLabel>Category</SectionLabel>
-            <p className="mt-2 font-serif text-3xl font-normal tracking-[-0.02em] text-zinc-950 dark:text-zinc-50">
+            <p className="mt-2 text-sm font-medium text-zinc-950 dark:text-zinc-50">
               {project.category}
             </p>
           </div>
 
           <div>
             <SectionLabel>Status</SectionLabel>
-            <div className="mt-3 text-sm text-zinc-700 dark:text-zinc-300">
+            <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">
               <ProjectStatus status={project.status} />
             </div>
           </div>
 
           <div>
             <SectionLabel>Links</SectionLabel>
-            <ProjectLinks project={project} className="mt-3" />
+            <ProjectLinks project={project} className="mt-2" />
           </div>
         </section>
 
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <SectionLabel>Overview</SectionLabel>
-            <p className="mt-4 max-w-3xl font-serif text-3xl leading-[1.18] tracking-[-0.02em] text-zinc-900 dark:text-zinc-100 sm:text-4xl">
+            <p className="mt-3 max-w-2xl text-[16.5px] leading-relaxed text-zinc-700 dark:text-zinc-300">
               {project.description}
             </p>
           </div>
 
           <div className="lg:col-span-4 lg:col-start-9">
             <SectionLabel>Stack</SectionLabel>
-            <div className="mt-4 flex flex-wrap gap-1.5">
+            <div className="mt-3 flex flex-wrap gap-1.5">
               {project.tags.map((tag) => (
                 <Tag key={tag}>{tag}</Tag>
               ))}
@@ -154,7 +150,7 @@ export default async function WorkPage({
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <SectionLabel>Next project</SectionLabel>
-              <h2 className="mt-2 wrap-break-word font-serif text-4xl font-normal tracking-[-0.02em] text-zinc-950 dark:text-zinc-50 sm:text-5xl">
+              <h2 className="mt-2 wrap-break-word font-display text-3xl font-semibold tracking-[-0.025em] text-zinc-950 dark:text-zinc-50 sm:text-4xl">
                 {next.title}
               </h2>
             </div>

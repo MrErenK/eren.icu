@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useSyncExternalStore } from "react";
 import { WORKS, WORK_CATEGORIES } from "@/lib/content";
 import { ProjectLinks, ProjectStatus } from "@/components/project-meta";
 import { ProjectStage } from "@/components/project-stage";
-import { Tag } from "@/components/tag";
 import { TiltCard } from "@/components/tilt-card";
 
 const COUNTS = Object.fromEntries(
@@ -17,8 +16,51 @@ const COUNTS = Object.fromEntries(
   ] as const)
 );
 
+const categoryListeners = new Set<() => void>();
+
+function resolveCategory(raw: string | null): string {
+  if (!raw) return "All";
+  const normalized = raw.toLowerCase();
+  return (
+    WORK_CATEGORIES.find((item) => item.toLowerCase() === normalized) ?? "All"
+  );
+}
+
+function getCategorySnapshot(): string {
+  const params = new URLSearchParams(window.location.search);
+  return resolveCategory(params.get("category"));
+}
+
+function getServerCategorySnapshot(): string {
+  return "All";
+}
+
+function subscribeCategory(callback: () => void) {
+  categoryListeners.add(callback);
+  window.addEventListener("popstate", callback);
+  return () => {
+    categoryListeners.delete(callback);
+    window.removeEventListener("popstate", callback);
+  };
+}
+
+function setCategoryInUrl(category: string) {
+  const url = new URL(window.location.href);
+  if (category === "All") {
+    url.searchParams.delete("category");
+  } else {
+    url.searchParams.set("category", category.toLowerCase());
+  }
+  window.history.replaceState(window.history.state, "", `${url.pathname}${url.search}${url.hash}`);
+  categoryListeners.forEach((listener) => listener());
+}
+
 export function WorksGallery() {
-  const [selected, setSelected] = useState<string>("All");
+  const selected = useSyncExternalStore(
+    subscribeCategory,
+    getCategorySnapshot,
+    getServerCategorySnapshot
+  );
 
   const filtered =
     selected === "All"
@@ -26,7 +68,7 @@ export function WorksGallery() {
       : WORKS.filter((item) => item.category === selected);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       <div
         role="group"
         aria-label="Filter projects by category"
@@ -39,8 +81,8 @@ export function WorksGallery() {
               key={category}
               type="button"
               aria-pressed={isActive}
-              onClick={() => setSelected(category)}
-              className={`group relative pb-1 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors duration-200 ${
+              onClick={() => setCategoryInUrl(category)}
+              className={`group relative pb-1 font-mono text-xs transition-colors duration-200 ${
                 isActive
                   ? "text-zinc-950 dark:text-zinc-50"
                   : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
@@ -63,80 +105,71 @@ export function WorksGallery() {
 
       <div className="divide-y divide-zinc-200/80 dark:divide-zinc-800/80">
         {filtered.map((project, index) => (
-          <TiltCard key={`${selected}-${project.slug}`}>
-            <article
-              className="reveal group relative isolate grid gap-8 py-12 lg:grid-cols-12 lg:items-center"
-              style={{ animationDelay: `${Math.min(index * 60, 300)}ms` }}
-            >
+          <article
+            key={`${selected}-${project.slug}`}
+            className="reveal group relative isolate grid gap-6 py-8 lg:grid-cols-12 lg:items-center lg:gap-8"
+            style={{ animationDelay: `${Math.min(index * 60, 300)}ms` }}
+          >
             <Link
               href={`/works/${project.slug}`}
               transitionTypes={["nav-forward"]}
               aria-label={`View ${project.title}`}
-              className="absolute inset-0 z-10 rounded-2xl"
+              className="absolute inset-0 z-10 rounded-xl"
             />
 
             <div
-              className={`${index % 2 ? "lg:order-2" : ""} min-w-0 lg:col-span-7`}
+              className="relative z-20 min-w-0 lg:col-span-7"
               style={{
                 viewTransitionName: `project-${project.slug}`,
                 viewTransitionClass: "project-morph",
               }}
             >
-              <ProjectStage
-                project={project}
-                className="transition-transform duration-500 group-hover:-translate-y-1"
-              />
+              <TiltCard strength={3}>
+                <Link
+                  href={`/works/${project.slug}`}
+                  transitionTypes={["nav-forward"]}
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  className="block"
+                >
+                  <ProjectStage
+                    project={project}
+                    className="transition-transform duration-500 group-hover:-translate-y-1"
+                  />
+                </Link>
+              </TiltCard>
             </div>
 
-            <div className={`${index % 2 ? "lg:order-1" : ""} lg:col-span-5`}>
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-baseline gap-3">
-                  <span className="font-serif text-4xl leading-none text-zinc-400 dark:text-zinc-600">
-                    {String(WORKS.indexOf(project) + 1).padStart(2, "0")}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
-                    {project.category}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 pt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-500 tabular-nums dark:text-zinc-400">
+            <div className="lg:col-span-5">
+              <div className="flex items-center justify-between gap-4 font-mono text-xs text-zinc-500 tabular-nums dark:text-zinc-400">
+                <span>{project.category}</span>
+                <div className="flex items-center gap-2">
                   <ProjectStatus status={project.status} />
                   <span aria-hidden="true">/</span>
                   <span>{project.year}</span>
                 </div>
               </div>
 
-              <h2 className="mt-4 wrap-break-word font-serif text-4xl font-normal leading-[1.05] tracking-[-0.02em] text-zinc-950 dark:text-zinc-50">
+              <h2 className="mt-2.5 wrap-break-word font-display text-3xl font-semibold leading-[1.1] tracking-[-0.025em] text-zinc-950 dark:text-zinc-50">
                 {project.title}
                 <span
                   aria-hidden="true"
-                  className="ml-2 inline-block align-middle text-2xl text-zinc-400 transition-transform duration-200 group-hover:translate-x-0.5 dark:text-zinc-500"
+                  className="ml-2 inline-block align-middle text-xl text-zinc-400 transition-transform duration-200 group-hover:translate-x-0.5 dark:text-zinc-500"
                 >
                   →
                 </span>
               </h2>
 
-              <div className="mt-4 space-y-3 text-[15.5px] leading-relaxed">
-                <p className="text-zinc-800 dark:text-zinc-200">
-                  {project.summary}
-                </p>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  {project.description}
-                </p>
-              </div>
-
-              <div className="mt-5 flex flex-wrap gap-1.5">
-                {project.tags.map((tag) => (
-                  <Tag key={tag}>{tag}</Tag>
-                ))}
-              </div>
+              <p className="mt-3 text-[15px] leading-relaxed text-zinc-600 dark:text-zinc-400">
+                {project.description}
+              </p>
 
               <ProjectLinks
                 project={project}
-                className="relative z-20 mt-6 items-center border-t border-zinc-200/70 pt-4 dark:border-zinc-800/70"
+                className="relative z-20 mt-5 items-center border-t border-zinc-200/70 pt-3.5 dark:border-zinc-800/70"
               />
             </div>
-            </article>
-          </TiltCard>
+          </article>
         ))}
       </div>
     </div>

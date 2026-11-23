@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { PROFILE } from "@/lib/content";
 import { CursorLight } from "@/components/cursor-light";
@@ -17,6 +16,18 @@ const inter = localFont({
     { path: "./fonts/Inter-SemiBold.ttf", weight: "600", style: "normal" },
   ],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const interDisplay = localFont({
+  src: [
+    {
+      path: "./fonts/InterDisplay-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+  variable: "--font-inter-display",
   display: "swap",
 });
 
@@ -37,16 +48,8 @@ const sourceCodePro = localFont({
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  weight: "400",
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-instrument-serif",
-  display: "swap",
-});
-
 const domainTitle = `${PROFILE.handle}${PROFILE.tld}`;
-const siteDescription = `${PROFILE.name}, software engineer and interface designer.`;
+const siteDescription = `${PROFILE.name}, a student and developer building web tools, Android ROM utilities, and game mods.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${domainTitle}`),
@@ -72,8 +75,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f3ea" },
-    { media: "(prefers-color-scheme: dark)", color: "#0c0b09" },
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
   ],
   colorScheme: "light dark",
 };
@@ -84,7 +87,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${inter.variable} ${sourceCodePro.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${inter.variable} ${interDisplay.variable} ${sourceCodePro.variable} h-full antialiased`}
     >
       <body className="relative flex min-h-full flex-col bg-paper text-zinc-950 transition-colors duration-200 dark:text-zinc-50">
         <a
@@ -96,7 +99,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed inset-x-0 top-0 -z-20 h-[70vh] bg-[radial-gradient(ellipse_55%_45%_at_50%_0%,rgba(255,255,255,0.85),transparent_72%)] dark:bg-[radial-gradient(ellipse_55%_45%_at_50%_0%,rgba(255,235,190,0.055),transparent_72%)]"
+          className="pointer-events-none fixed inset-x-0 top-0 -z-20 h-[70vh] bg-[radial-gradient(ellipse_55%_45%_at_50%_0%,rgba(255,255,255,0.85),transparent_72%)] dark:bg-[radial-gradient(ellipse_55%_45%_at_50%_0%,rgba(255,255,255,0.045),transparent_72%)]"
         />
         <div
           aria-hidden="true"

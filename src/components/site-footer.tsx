@@ -22,11 +22,9 @@ export function SiteFooter() {
       />
       <div className="relative mx-auto max-w-6xl px-6 sm:px-8">
         <div className="flex flex-col gap-4 py-8 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between dark:text-zinc-400">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span className="font-medium text-zinc-700 dark:text-zinc-300">
-              © 2026 {PROFILE.name}.
-            </span>
-          </div>
+          <span className="font-medium text-zinc-700 dark:text-zinc-300">
+            © 2026 {PROFILE.name}.
+          </span>
 
           <div className="flex items-center gap-5">
             {NAV_ITEMS.map((item) => (
@@ -52,7 +50,7 @@ export function SiteFooter() {
           aria-hidden="true"
           className="select-none overflow-hidden border-t border-zinc-200/80 print:hidden dark:border-zinc-800/80"
         >
-          <span className="block translate-y-[0.16em] pt-5 font-serif text-[clamp(5rem,20vw,16rem)] leading-[0.8] tracking-[-0.06em] text-zinc-950/[0.055] dark:text-zinc-50/[0.055]">
+          <span className="block translate-y-[0.14em] whitespace-nowrap pt-5 font-display text-[clamp(2.75rem,11.5vw,9.25rem)] font-semibold leading-[0.88] tracking-[-0.05em] text-zinc-950/[0.055] dark:text-zinc-50/[0.055]">
             {PROFILE.handle}
             <span className="group/icu inline-grid">
               <span

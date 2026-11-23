@@ -15,16 +15,10 @@ const DOMAIN_TITLE = `${PROFILE.handle}${PROFILE.tld}`;
 const AWAY_TITLES = [PROFILE.easterEgg, "still here", "left the tab open"];
 
 interface PresenceState {
-  mounted: boolean;
-  tabSwitches: number;
-  idleSeconds: number;
   icuPeek: boolean;
 }
 
 const DEFAULT_STATE: PresenceState = {
-  mounted: false,
-  tabSwitches: 0,
-  idleSeconds: 0,
   icuPeek: false,
 };
 
@@ -36,10 +30,9 @@ export function PresenceEggsProvider({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const [state, setState] = useState<PresenceState>(DEFAULT_STATE);
+  const [icuPeek, setIcuPeek] = useState(false);
 
   const initializedRef = useRef(false);
-  const lastActivityRef = useRef(0);
   const baseTitleRef = useRef(DOMAIN_TITLE);
   const titleShiftedRef = useRef(false);
   const awayCountRef = useRef(0);
@@ -48,7 +41,6 @@ export function PresenceEggsProvider({
   useEffect(() => {
     if (initializedRef.current) return;
     initializedRef.current = true;
-    lastActivityRef.current = Date.now();
 
     baseTitleRef.current = document.title || DOMAIN_TITLE;
 
@@ -57,10 +49,6 @@ export function PresenceEggsProvider({
       "font-weight: 600; color: inherit;",
       "color: #71717a;"
     );
-
-    queueMicrotask(() => {
-      setState((prev) => ({ ...prev, mounted: true }));
-    });
   }, []);
 
   useEffect(() => {
@@ -76,13 +64,6 @@ export function PresenceEggsProvider({
     let awayTimer: number | null = null;
     let returnTimer: number | null = null;
     let peekTimer: number | null = null;
-
-    const resetIdle = () => {
-      lastActivityRef.current = Date.now();
-      setState((prev) =>
-        prev.idleSeconds === 0 ? prev : { ...prev, idleSeconds: 0 }
-      );
-    };
 
     const handleVisibility = () => {
       if (document.visibilityState === "hidden") {
@@ -104,12 +85,6 @@ export function PresenceEggsProvider({
           window.clearTimeout(awayTimer);
           awayTimer = null;
         }
-        lastActivityRef.current = Date.now();
-        setState((prev) => ({
-          ...prev,
-          tabSwitches: prev.tabSwitches + 1,
-          idleSeconds: 0,
-        }));
 
         if (titleShiftedRef.current) {
           if (returnTimer) window.clearTimeout(returnTimer);
@@ -123,7 +98,6 @@ export function PresenceEggsProvider({
     };
 
     const handleKeydown = (e: KeyboardEvent) => {
-      resetIdle();
       const target = e.target as HTMLElement | null;
       if (
         target &&
@@ -140,41 +114,28 @@ export function PresenceEggsProvider({
         ).slice(-3);
         if (keyBufferRef.current === "icu") {
           keyBufferRef.current = "";
-          setState((prev) => ({ ...prev, icuPeek: true }));
+          setIcuPeek(true);
           if (peekTimer) window.clearTimeout(peekTimer);
           peekTimer = window.setTimeout(() => {
-            setState((prev) => ({ ...prev, icuPeek: false }));
+            setIcuPeek(false);
           }, 3400);
         }
       }
     };
 
-    const tick = window.setInterval(() => {
-      if (document.visibilityState !== "visible") return;
-      const idle = Math.floor((Date.now() - lastActivityRef.current) / 1000);
-      setState((prev) =>
-        prev.idleSeconds === idle ? prev : { ...prev, idleSeconds: idle }
-      );
-    }, 1000);
-
-    window.addEventListener("pointermove", resetIdle, { passive: true });
-    window.addEventListener("scroll", resetIdle, { passive: true });
     window.addEventListener("keydown", handleKeydown);
     document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
-      window.clearInterval(tick);
       if (awayTimer) window.clearTimeout(awayTimer);
       if (returnTimer) window.clearTimeout(returnTimer);
       if (peekTimer) window.clearTimeout(peekTimer);
-      window.removeEventListener("pointermove", resetIdle);
-      window.removeEventListener("scroll", resetIdle);
       window.removeEventListener("keydown", handleKeydown);
       document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
 
-  const value = useMemo(() => state, [state]);
+  const value = useMemo(() => ({ icuPeek }), [icuPeek]);
 
   return (
     <PresenceContext.Provider value={value}>{children}</PresenceContext.Provider>

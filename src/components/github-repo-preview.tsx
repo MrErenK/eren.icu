@@ -58,7 +58,7 @@ export function GitHubRepoPreview({
 
   return (
     <div
-      className={`${cardSize} flex w-full min-w-0 flex-col justify-between overflow-hidden border-zinc-200/80 bg-paper transition-shadow duration-500 group-hover:shadow-[0_8px_24px_rgba(23,21,18,0.07)] dark:border-zinc-800/80 dark:group-hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)]`}
+      className={`${cardSize} flex w-full min-w-0 flex-col justify-between overflow-hidden border-zinc-200/80 bg-paper transition-shadow duration-500 group-hover:shadow-[0_8px_24px_rgba(9,9,11,0.07)] dark:border-zinc-800/80 dark:group-hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)]`}
     >
       <div className="flex items-center gap-2">
         <span

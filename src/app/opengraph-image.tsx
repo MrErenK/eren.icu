@@ -156,7 +156,7 @@ export default async function OpengraphImage() {
             letterSpacing: "0.08em",
           }}
         >
-          <span>Portfolio · 2026</span>
+          <span>{PROFILE.email}</span>
           <span>{PROFILE.handle}{PROFILE.tld}</span>
         </div>
       </div>

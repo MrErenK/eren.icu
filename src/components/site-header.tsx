@@ -24,10 +24,10 @@ export function SiteHeader() {
   return (
     <header
       style={{ viewTransitionName: "site-header" }}
-      className={`sticky top-0 z-30 w-full border-b backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-300 ${
+      className={`sticky top-0 z-30 w-full border-b border-zinc-200/80 backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-300 dark:border-zinc-800/80 ${
         scrolled
-          ? "border-zinc-200/80 bg-paper/95 shadow-[0_8px_24px_rgba(23,21,18,0.05)] dark:border-zinc-800/80 dark:shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
-          : "border-zinc-200/80 bg-paper/85 dark:border-zinc-800/80"
+          ? "bg-paper/95 shadow-[0_8px_24px_rgba(9,9,11,0.05)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+          : "bg-paper/85"
       }`}
     >
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6 sm:h-16 sm:px-8">
@@ -39,9 +39,9 @@ export function SiteHeader() {
           <span className="text-zinc-950 transition-opacity duration-200 hover:opacity-75 dark:text-zinc-50">
             {PROFILE.handle}
           </span>
-          <span className="group/icu relative hidden items-baseline pr-1 sm:inline-flex">
+          <span className="group/icu relative inline-flex items-baseline pr-1">
             <span
-              className={`font-mono text-[13.5px] text-zinc-400 transition-opacity duration-300 group-hover/icu:opacity-0 dark:text-zinc-400 ${
+              className={`font-mono text-[13.5px] text-zinc-400 transition-opacity duration-300 group-hover/icu:opacity-0 ${
                 icuPeek ? "opacity-0" : "opacity-100"
               }`}
             >

@@ -9,7 +9,7 @@ export function SectionLabel({
 }) {
   return (
     <p
-      className={`font-mono text-[11px] uppercase tracking-[0.14em] text-accent ${className}`}
+      className={`font-mono text-xs text-zinc-500 dark:text-zinc-400 ${className}`}
     >
       {children}
     </p>

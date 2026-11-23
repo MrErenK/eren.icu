@@ -1,56 +1,35 @@
 import type { Metadata } from "next";
-import { randomInt } from "node:crypto";
-import { connection } from "next/server";
 import { PROFILE } from "@/lib/content";
 import { CopyEmailButton } from "@/components/copy-email";
 import { PageHeader } from "@/components/page-header";
 import { PageTransition } from "@/components/page-transition";
 import { SectionLabel } from "@/components/section-label";
 
-const GREETINGS = [
-  "Say hello.",
-  "Say hi.",
-  "Drop a line.",
-  "Let's talk.",
-  "What are you building?",
-];
-
 export const metadata: Metadata = {
   title: "Contact",
   description: "Reach Eren via email, GitHub, or Telegram.",
 };
 
-export const instant = false;
-
-export default async function ContactPage() {
-  await connection();
-  const greeting = GREETINGS[randomInt(GREETINGS.length)];
-
+export default function ContactPage() {
   return (
     <PageTransition>
       <div className="space-y-16">
         <PageHeader
           kicker="Contact"
-          title={<em className="italic">{greeting}</em>}
+          title="Get in touch."
           description={PROFILE.contactPrompt}
           size="large"
-          folio="Open / 2026"
         />
 
         <section
           aria-label="Email"
           className="reveal-3 border-y border-zinc-200/80 py-10 dark:border-zinc-800/80"
         >
-          <div className="flex items-center justify-between gap-4">
-            <SectionLabel>Email</SectionLabel>
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
-              Preferred
-            </span>
-          </div>
+          <SectionLabel>Email</SectionLabel>
 
           <a
             href={`mailto:${PROFILE.email}`}
-            className="mt-6 block w-fit font-serif text-[clamp(2.5rem,6vw,5rem)] leading-none tracking-[-0.04em] text-zinc-950 transition-opacity duration-300 hover:opacity-70 dark:text-zinc-50"
+            className="mt-4 block w-fit font-display text-[clamp(2rem,5vw,3.75rem)] font-semibold leading-none tracking-[-0.035em] text-zinc-950 transition-opacity duration-300 hover:opacity-70 dark:text-zinc-50"
           >
             {PROFILE.email}
           </a>
@@ -72,7 +51,7 @@ export default async function ContactPage() {
           </div>
 
           <p className="mt-5 max-w-md text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Best for project inquiries and longer notes.
+            Best for project inquiries and longer messages.
           </p>
         </section>
 
@@ -102,7 +81,7 @@ export default async function ContactPage() {
                 </span>
               </div>
 
-              <p className="font-serif text-3xl font-normal tracking-[-0.02em] text-zinc-950 dark:text-zinc-50">
+              <p className="font-display text-2xl font-semibold tracking-[-0.02em] text-zinc-950 dark:text-zinc-50">
                 {social.handle ?? social.label}
               </p>
 
@@ -112,7 +91,7 @@ export default async function ContactPage() {
                 </p>
               ) : null}
 
-              <span className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
+              <span className="mt-2 font-mono text-xs text-zinc-400 dark:text-zinc-500">
                 Open {social.label}
               </span>
             </a>

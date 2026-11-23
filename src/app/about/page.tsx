@@ -18,8 +18,7 @@ export default function AboutPage() {
         <PageHeader
           kicker="About"
           title={ABOUT.lead}
-          titleClassName="max-w-4xl"
-          folio="Profile / 2026"
+          titleClassName="max-w-3xl"
         />
 
         <section className="reveal-2 grid grid-cols-1 gap-8 border-t border-zinc-200/80 pt-10 dark:border-zinc-800/80 md:grid-cols-[200px_1fr]">
@@ -30,7 +29,7 @@ export default function AboutPage() {
                 key={idx}
                 className={
                   idx === 0
-                    ? "text-[17px] leading-[1.8] text-zinc-900 first-letter:float-left first-letter:mr-3 first-letter:font-serif first-letter:text-6xl first-letter:leading-[0.72] dark:text-zinc-200"
+                    ? "text-[16px] leading-[1.75] text-zinc-800 dark:text-zinc-200"
                     : "text-[15.5px] leading-[1.75] text-zinc-600 dark:text-zinc-400"
                 }
               >
@@ -49,7 +48,7 @@ export default function AboutPage() {
                   key={group.group}
                   className="grid gap-2 py-5 first:pt-0 last:pb-0 sm:grid-cols-[180px_1fr] sm:items-baseline"
                 >
-                  <h3 className="font-serif text-2xl font-normal tracking-[-0.02em] text-zinc-950 dark:text-zinc-50">
+                  <h3 className="font-display text-xl font-semibold tracking-[-0.02em] text-zinc-950 dark:text-zinc-50">
                     {group.group}
                   </h3>
                   <ul className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-sm text-zinc-600 dark:text-zinc-400">
@@ -67,9 +66,9 @@ export default function AboutPage() {
           <section className="border-t border-zinc-200/80 pt-10 dark:border-zinc-800/80">
             <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
               <div className="lg:col-span-7">
-                <SectionLabel>Next</SectionLabel>
-                <h2 className="mt-3 font-serif text-4xl leading-[1.02] tracking-[-0.03em] text-zinc-950 dark:text-zinc-50 sm:text-5xl">
-                  Have something in mind?
+                <SectionLabel>Contact</SectionLabel>
+                <h2 className="mt-2 font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-zinc-950 dark:text-zinc-50 sm:text-4xl">
+                  Get in touch.
                 </h2>
               </div>
 

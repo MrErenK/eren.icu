@@ -1,18 +1,18 @@
 import rawConfig from "../../site.config.json";
 
-export interface SocialLink {
+interface SocialLink {
   label: string;
   href: string;
   handle?: string;
   note?: string;
 }
 
-export interface StackGroup {
+interface StackGroup {
   group: string;
   items: string[];
 }
 
-export interface ProjectLink {
+interface ProjectLink {
   label: string;
   href: string;
 }
@@ -32,7 +32,7 @@ export interface WorkProject {
   tags: string[];
 }
 
-export interface SiteConfig {
+interface SiteConfig {
   site: {
     name: string;
     handle: string;
@@ -53,7 +53,7 @@ export interface SiteConfig {
   works: WorkProject[];
 }
 
-export const siteConfig: SiteConfig = rawConfig;
+const siteConfig: SiteConfig = rawConfig;
 
 export const PROFILE = siteConfig.site;
 export const ABOUT = siteConfig.about;
