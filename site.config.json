@@ -47,6 +47,17 @@
   },
   "works": [
     {
+      "slug": "backrooms-96k",
+      "title": "Backrooms 96K",
+      "year": "2026",
+      "category": "Games",
+      "status": "Open Source",
+      "repo": "https://github.com/MrErenK/backrooms-96k",
+      "summary": "Endless first-person Backrooms walking simulator in no_std Rust and raw OpenGL, packed into a single native executable under 96 KiB.",
+      "description": "Built with zero Cargo dependencies for Linux and Windows x86-64. Every wall, texture, shader, bitmap font glyph, and ALSA or WinMM sound effect is generated procedurally in code, featuring an infinite chunked maze, VHS camcorder HUD, and dynamic lighting.",
+      "tags": ["Rust", "OpenGL", "no_std", "Procedural"]
+    },
+    {
       "slug": "gcp-bucket-nextjs",
       "title": "gcp-bucket-nextjs",
       "year": "2026",
