@@ -47,6 +47,17 @@
   },
   "works": [
     {
+      "slug": "vulkan-mailbox-fix",
+      "title": "Vulkan Mailbox Fix",
+      "year": "2026",
+      "category": "Mods",
+      "status": "Open Source",
+      "repo": "https://github.com/MrErenK/vulkan-mailbox-fix",
+      "summary": "Client-side Minecraft 26.2+ mod for Fabric and NeoForge that fixes FPS getting capped to monitor refresh rate on Linux Wayland with Vulkan (MC-307719).",
+      "description": "Raises the Vulkan MAILBOX swapchain image count from 3 to 4, clamped to the driver's supported maximum, so hybrid-GPU Wayland setups can run uncapped without screen tearing when VSync is off.",
+      "tags": ["Java", "Fabric", "NeoForge", "Vulkan", "Minecraft"]
+    },
+    {
       "slug": "backrooms-96k",
       "title": "Backrooms 96K",
       "year": "2026",
